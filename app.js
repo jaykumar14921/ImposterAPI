@@ -14,13 +14,11 @@ async function main() {
 
   const client = new MongoClient(uri);
 
-//   app.get('/',(req,res)=>{
-//       res.sendFile(path.join(__dirname,'/index.html'));
-//   })
+  app.get('/',(req,res)=>{
+      res.sendFile(path.join(__dirname,'/index.html'));
+  })
 
-//   app.get('/netflix',(req,res)=>{
-//     res.sendFile(path.join(__dirname,'/45_Netflix.html'));
-// })
+
 
   try {
     await client.connect();
@@ -117,7 +115,7 @@ async function main() {
       }
     });
 
-  //  const { ObjectId } = require('mongodb');
+    
 //TO UPDATE A RECORD IN THE COLLECTION PARTIALLY OR COMPLETELY
 app.put('/data/:id', express.json(), async (req, res) => {
   try {
