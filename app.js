@@ -175,7 +175,7 @@ app.patch('/data/:id', express.json(), async (req, res) => {
       }
     });
 
-    app.listen(PORT, () => {
+    app.listen(PORT,'0.0.0.0', () => {
       console.log(`Server listening at http://localhost:${PORT}`);
     });
 
