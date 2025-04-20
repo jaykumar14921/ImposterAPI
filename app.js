@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require('express');
 const path=require('path');
 const { MongoClient } = require('mongodb');
+const { link } = require("fs");
 
 const uri = process.env.MONGODBatlas_URL;
 
@@ -15,7 +16,7 @@ async function main() {
   const client = new MongoClient(uri);
 
   app.get('/',(req,res)=>{
-      res.sendFile(path.join(__dirname,'/index.html'));
+      res.sendFile(path.join(__dirname,'../public/index.html'));
   })
 
 
