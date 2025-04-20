@@ -10,7 +10,7 @@ const collectionName = "FakeAPI";
 
 async function main() {
   const app = express();
-  const port =process.env.port || 3000;
+  const PORT =process.env.PORT || 3000;
 
   const client = new MongoClient(uri);
 
@@ -175,8 +175,8 @@ app.patch('/data/:id', express.json(), async (req, res) => {
       }
     });
 
-    app.listen(port, () => {
-      console.log(`Server listening at http://localhost:${port}`);
+    app.listen(PORT, () => {
+      console.log(`Server listening at http://localhost:${PORT}`);
     });
 
   } finally {
