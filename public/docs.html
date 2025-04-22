@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docs</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+    <style>
+        body{
+            font-family: arial;
+            background-color: rgba(128, 128, 128, 0.078);
+        }
+
+        #container{
+             border: 1px solid green;
+             padding: 20px;
+             border-radius: 20px;
+             background-color: rgba(71, 255, 47, 0.146);
+             width: 530px;
+        }
+
+        p{
+            margin: 0px;
+        }
+
+        h3{
+            color: rgb(9, 140, 9);
+            margin: 15px;
+        }
+
+        a{
+            text-decoration: none;
+            margin: 10px;
+            color: rgb(9, 140, 9);
+        }
+
+        li{
+            margin: 10px;
+        }
+
+        #navbar{
+            width: 290px;
+        }
+
+        nav{
+            background-color: rgba(71, 255, 47, 0.146);
+            border: 1px solid green;
+            border-radius: 20px;
+            position: sticky;
+            top: 50px;
+        }
+
+        #code-div{
+            width: 500px;
+            margin-left: 100px;
+        }
+
+        header{
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        @media screen and (max-width: 900px) {
+           #navbar{
+            display: none;
+           }
+
+            #code-div{
+                margin-left: 0px;
+            } 
+          }
+    </style>
+</head>
+<body class="mx-3">
+
+    <header>
+        <div class="d-flex justify-content-between">
+            <h4 class="m-4">_ImposterAPI</h4>
+            <img src="../public/assets/ImageGenerator_ChatGPT_Image_Apr_14__2025__03_26_49_PM_generate_variations-removebg-preview.png" width="100px" height="75px" class="me-5 mt-2" alt="">
+        </div>
+    </header>
+
+    <div class="row">
+
+        <div id="navbar" class="col-4">
+            <h3 class="position-sticky top-0">Products</h3>
+             <nav>
+                <ul>
+                    <li><a href="#all">Get all Products</a></li>
+                    <li><a href="#single">Get a single Product</a></li>
+                    <li><a href="#category">Get Products by Category</a></li>
+                    <li><a href="#sub-category">Get Products by Category & Sub-category</a></li>
+                    <li><a href="#add">Add a new Product</a></li>
+                    <li><a href="#put">Update a Product (PUT)</a></li>
+                    <li><a href="#patch">Update a Product (PATCH)</a></li>
+                    <li><a href="#delete">Delete a Product</a></li>
+                </ul>
+             </nav>
+        </div>
+
+        <div id="code-div" class="col-8">
+              <h1 style="color: green;">Getting Started</h1>
+              <p style="color: green;">Alright, so this documentation basically shows you how to use ImposterAPI like a pro.</p>
+
+              <h2>Products</h2>
+
+<h3 id="all">Get all products</h3>
+<div id="container">
+<div>
+<pre>
+fetch("https://imposterapi-5.onrender.com/data")
+.then(res => res.json())
+.then(res => console.log(res))
+</pre>
+</div>
+</div>
+
+<h3 id="single">Get single product</h3>
+<div id="container">
+<div>
+<pre>
+fetch("https://imposterapi-5.onrender.com/api/data/1") 
+.then(res => res.json())
+.then(res => console.log(res))
+</pre>
+</div>
+</div>
+
+<h3 id="category">Get Products by Category</h3>
+<div id="container">
+<div>
+<pre>
+fetch("https://imposterapi-5.onrender.com/api/data/category/dairy_breakfast")
+.then(res => res.json())
+.then(res => console.log(res))
+</pre>
+</div>
+</div>
+
+<h3 id="sub-category">Get Products by Category & Sub-category</h3>
+<div id="container">
+<div>
+<pre>
+fetch("https://imposterapi-5.onrender.com/api/data/category/dairy_breakfast/subcategory/bread")
+.then(res => res.json())
+.then(res => console.log(res))
+</pre>
+</div>
+</div>
+
+<h3 id="add">Add a product</h3>
+<div id="container">
+<div>
+<pre>
+fetch("https://imposterapi-5.onrender.com/data", {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({
+"id": 777,
+"title": "Bonn Bombay Pav (12 slices)",
+"unit": "350g (12 pieces)",
+"type": "Pav",
+"price": 55,
+"image": "https://fakeapi.s3.ap-south-1.amazonaws.com/dairy%26breakfast/bread/bonn-bombay-pav.webp",
+"description": "Bonn Prime Time Pav buns, the bread that you seek out, the bread that you believe in, the bread that you relate with and take home each day",
+"categories": {
+"category": "dairy_breakfast",
+"sub-category": "bread"
+},
+"fssaiLicense": "10019064001813",
+"countryOfOrigin": "India",
+"shelfLife": "6 Days"
+})
+})
+</pre>
+</div>
+</div>
+
+
+<h3 id="put">Update a product (PUT)</h3>
+<div id="container">
+<div>
+<pre>
+fetch("https://imposterapi-5.onrender.com/api/data/2", {
+method: 'PUT',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({
+"categories": {
+"category": "atta_rice",
+"sub-category": "dal"
+},
+})
+})
+</pre>
+</div>
+</div>
+
+
+<h3 id="patch">Update a product (PATCH)</h3>
+<div id="container">
+<div>
+<pre>
+fetch("https://imposterapi-5.onrender.com/api/data/2", {
+method: 'PATCH',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({
+"categories": {
+"category": "atta_rice",
+"sub-category": "dal"
+},
+})
+})
+</pre>
+</div>
+</div>
+
+
+<h3 id="delete">Delete a product</h3>
+<div id="container">
+<div>
+<pre>
+fetch("https://imposterapi-5.onrender.com/api/data/1", {
+method: 'DELETE',
+}).then(res => res.json())
+.then(res => console.log(res))
+</pre>
+</div>
+</div>
+</div>
+
+    </div>
+</body>
+</html>
