@@ -34,8 +34,19 @@ async function main() {
     const collection = db.collection(collectionName);
 
     //TO FETCH ALL RECORDS
+    app.get('/data', async (req, res) => {
+      try {
+        const data = await collection.find({}).toArray();
+        res.json(data);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        res.status(500).send("Internal Server Error");
+      }
+    });
+
+
     // TO FETCH RECORDS WITH PAGINATION
-app.get('/data', async (req, res) => {
+     app.get('/data/limit', async (req, res) => {
   try {
     // Get page and limit from query params (default to page 1, limit 25)
     const page = parseInt(req.query.page) || 1;
