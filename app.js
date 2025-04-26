@@ -34,49 +34,61 @@ async function main() {
     const collection = db.collection(collectionName);
 
     //TO FETCH ALL RECORDS
-    app.get('/data', async (req, res) => {
-      try {
-        const data = await collection.find({}).toArray();
-        res.json(data);
-      } catch (err) {
-        console.error("Error fetching data:", err);
-        res.status(500).send("Internal Server Error");
-      }
-    });
+    // app.get('/data', async (req, res) => {
+    //   try {
+    //     const data = await collection.find({}).toArray();
+    //     res.json(data);
+    //   } catch (err) {
+    //     console.error("Error fetching data:", err);
+    //     res.status(500).send("Internal Server Error");
+    //   }
+    // });
 
+    // TO FETCH RECORDS WITH LIMIT & PAGINATION
+    app.get('/data', (req, res) => {
+      const limit = parseInt(req.query.limit) || 25;
+      const page = parseInt(req.query.page) || 1;
+    
+      const startIndex = (page - 1) * limit;
+      const endIndex = page * limit;
+    
+      const paginatedData = products.slice(startIndex, endIndex);
+      res.json(paginatedData);
+    });
+    
 
     // TO FETCH RECORDS WITH PAGINATION
-     app.get('/data/limit', async (req, res) => {
-  try {
-    // Get page and limit from query params (default to page 1, limit 25)
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 25;
+//      app.get('/data/limit', async (req, res) => {
+//   try {
+//     // Get page and limit from query params (default to page 1, limit 25)
+//     const page = parseInt(req.query.page) || 1;
+//     const limit = parseInt(req.query.limit) || 25;
 
-    // Calculate skip (how many documents to skip)
-    const skip = (page - 1) * limit;
+//     // Calculate skip (how many documents to skip)
+//     const skip = (page - 1) * limit;
 
-    // Total number of documents
-    const total = await collection.countDocuments();
+//     // Total number of documents
+//     const total = await collection.countDocuments();
 
-    // Fetch documents with skip and limit
-    const data = await collection.find({})
-                                  .skip(skip)
-                                  .limit(limit)
-                                  .toArray();
+//     // Fetch documents with skip and limit
+//     const data = await collection.find({})
+//                                   .skip(skip)
+//                                   .limit(limit)
+//                                   .toArray();
 
-    const totalPages = Math.ceil(total / limit);
+//     const totalPages = Math.ceil(total / limit);
 
-    res.json({
-      data,
-      total,
-      page,
-      totalPages
-    });
-  } catch (err) {
-    console.error("Error fetching paginated data:", err);
-    res.status(500).send("Internal Server Error");
-  }
-});
+//     res.json({
+//       data,
+//       total,
+//       page,
+//       totalPages
+//     });
+//   } catch (err) {
+//     console.error("Error fetching paginated data:", err);
+//     res.status(500).send("Internal Server Error");
+//   }
+// });
 
 
    
