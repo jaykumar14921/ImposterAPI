@@ -67,10 +67,10 @@ async function main() {
         }
 
         // Total number of documents
-        const total = await collection.countDocuments();
+        const total = await collection.countDocuments(query);
 
         // Fetch documents with skip and limit
-        const data = await collection.find({})
+        const data = await collection.find(query)
           .skip(skip)
           .limit(limit)
           .toArray();
