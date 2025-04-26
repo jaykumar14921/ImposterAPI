@@ -50,7 +50,8 @@ async function main() {
       try {
         // Get page and limit from query params (default to page 1, limit 25)
         const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 25;
+        const limit = parseInt(req.query.limit) || 28;
+        const category = req.query.category;
 
         // Basic validation for page and limit
         if (isNaN(page) || page < 1 || isNaN(limit) || limit < 1) {
@@ -59,6 +60,11 @@ async function main() {
 
         // Calculate skip (how many documents to skip)
         const skip = (page - 1) * limit;
+        let query={};
+
+        if(category&&category!=='all'){
+          query={'categories.category':category};
+        }
 
         // Total number of documents
         const total = await collection.countDocuments();
