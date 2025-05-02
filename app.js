@@ -39,29 +39,19 @@ async function main() {
     //TO FETCH ALL RECORDS
 
     app.get('/data', async (req, res) => {
-      const limit = parseInt(req.query.limit) || 28; // Default limit
-      const page = parseInt(req.query.page) || 1;     // Default page
-      const category = req.query.category;
-    
+      const limit = 10;
+      const page = 1;
       const startIndex = (page - 1) * limit;
     
-      let query = {};
-      if (category && category !== 'all') {
-        query.category = category;
-      }
-    
       try {
-        const totalProducts = await Product.countDocuments(query);
-        const products = await Product.find(query)
+        const totalProducts = await Product.countDocuments({});
+        const products = await Product.find({})
           .skip(startIndex)
           .limit(limit);
     
         const totalPages = Math.ceil(totalProducts / limit);
     
-        res.json({
-          data: products,
-          totalPages: totalPages
-        });
+        res.json({ data: products, totalPages: totalPages });
       } catch (error) {
         console.error('Error fetching products:', error);
         res.status(500).json({ error: 'Failed to fetch products' });
