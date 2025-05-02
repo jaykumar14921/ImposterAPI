@@ -3,6 +3,7 @@ const express = require('express');
 const path=require('path');
 const { MongoClient } = require('mongodb');
 const { link } = require("fs");
+const cors=require("cors");
 
 const uri = process.env.MONGODBatlas_URL;
 
@@ -14,6 +15,8 @@ async function main() {
   const PORT =process.env.PORT || 3000;
 
   const client = new MongoClient(uri);
+
+  app.use(cors());
 
   app.use(express.static(path.join(__dirname, 'public')));
 
