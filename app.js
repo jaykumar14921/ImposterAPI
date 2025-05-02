@@ -34,7 +34,7 @@ async function main() {
     const collection = db.collection(collectionName);
 
     //TO FETCH ALL RECORDS
-    app.get('/data/all', async (req, res) => {
+    app.get('/data', async (req, res) => {
       try {
         const data = await collection.find({}).toArray();
         res.json(data);
@@ -46,7 +46,7 @@ async function main() {
 
 
     // TO FETCH RECORDS WITH PAGINATION
-    app.get('/data', async (req, res) => {
+    app.get('/data/limit', async (req, res) => {
       try {
         // Get page and limit from query params (default to page 1, limit 25)
         const page = parseInt(req.query.page) || 1;
@@ -89,58 +89,9 @@ async function main() {
       }
     });
 
-
-
-    // TO FETCH RECORDS WITH LIMIT & PAGINATION
-    // app.get('/data', (req, res) => {
-    //   const limit = parseInt(req.query.limit) || 25;
-    //   const page = parseInt(req.query.page) || 1;
-    
-    //   const startIndex = (page - 1) * limit;
-    //   const endIndex = page * limit;
-    
-    //   const paginatedData = products.slice(startIndex, endIndex);
-    //   res.json(paginatedData);
-    // });
-    
-
-    // TO FETCH RECORDS WITH PAGINATION
-//      app.get('/data/limit', async (req, res) => {
-//   try {
-//     // Get page and limit from query params (default to page 1, limit 25)
-//     const page = parseInt(req.query.page) || 1;
-//     const limit = parseInt(req.query.limit) || 25;
-
-//     // Calculate skip (how many documents to skip)
-//     const skip = (page - 1) * limit;
-
-//     // Total number of documents
-//     const total = await collection.countDocuments();
-
-//     // Fetch documents with skip and limit
-//     const data = await collection.find({})
-//                                   .skip(skip)
-//                                   .limit(limit)
-//                                   .toArray();
-
-//     const totalPages = Math.ceil(total / limit);
-
-//     res.json({
-//       data,
-//       total,
-//       page,
-//       totalPages
-//     });
-//   } catch (err) {
-//     console.error("Error fetching paginated data:", err);
-//     res.status(500).send("Internal Server Error");
-//   }
-// });
-
-
    
     //TO FETCH RECORD ACCORDING TO ID
-    app.get('/api/data/:id', async (req, res) => {
+    app.get('/data/:id', async (req, res) => {
       const id = parseInt(req.params.id); 
     
       if (isNaN(id)) {
@@ -160,9 +111,41 @@ async function main() {
       }
     });
 
+    //TO FETCH ALL CATEGORIES
+    app.get('/api/categories', async (req, res) => {
+      try {
+        const distinctCategories = await collection.distinct('categories.category');
+        if (distinctCategories.length > 0) {
+          res.json(distinctCategories);
+        } else {
+          res.status(404).json({ error: 'No categories found' });
+        }
+      } catch (error) {
+        console.error('Error fetching distinct categories:', error);
+        res.status(500).json({ error: 'Failed to fetch categories' });
+      }
+    });
+
+   //TO FETCH ALL SUB-CATEGORIES
+    app.get('/api/sub-categories', async (req, res) => {
+      try {
+        const distinctsubCategories = await collection.distinct('categories.sub-category');
+        if (distinctsubCategories.length > 0) {
+          res.json(distinctsubCategories);
+        } else {
+          res.status(404).json({ error: 'No sub-category found' });
+        }
+      } catch (error) {
+        console.error('Error fetching distinct sub-categories:', error);
+        res.status(500).json({ error: 'Failed to fetch sub-categories' });
+      }
+    });
+
+
+    
     
     //TO FETCH RECORDS ACCORDING TO CATEGORY
-    app.get('/api/data/category/:category', async (req, res) => {
+    app.get('/data/category/:category', async (req, res) => {
       const category = req.params.category;
     
       try {
@@ -180,7 +163,7 @@ async function main() {
 
   
     //TO FETCH RECORDS ACCORDING TO CATEGORY AND SUB-CATEGORY
-    app.get('/api/data/category/:category/subcategory/:subcategory', async (req, res) => {
+    app.get('/data/category/:category/sub-category/:subcategory', async (req, res) => {
       const category = req.params.category;
       const subcategory = req.params.subcategory;
     
