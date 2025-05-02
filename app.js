@@ -37,15 +37,47 @@ async function main() {
     const collection = db.collection(collectionName);
 
     //TO FETCH ALL RECORDS
+
     app.get('/data', async (req, res) => {
+      const limit = parseInt(req.query.limit) || 28; // Default limit
+      const page = parseInt(req.query.page) || 1;     // Default page
+      const category = req.query.category;
+    
+      const startIndex = (page - 1) * limit;
+    
+      let query = {};
+      if (category && category !== 'all') {
+        query.category = category;
+      }
+    
       try {
-        const data = await collection.find({}).toArray();
-        res.json(data);
-      } catch (err) {
-        console.error("Error fetching data:", err);
-        res.status(500).send("Internal Server Error");
+        const totalProducts = await Product.countDocuments(query);
+        const products = await Product.find(query)
+          .skip(startIndex)
+          .limit(limit);
+    
+        const totalPages = Math.ceil(totalProducts / limit);
+    
+        res.json({
+          data: products,
+          totalPages: totalPages
+        });
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).json({ error: 'Failed to fetch products' });
       }
     });
+
+
+    // app.get('/data', async (req, res) => {
+    //   try {
+    //     const data = await collection.find({}).toArray();
+    //     res.json(data);
+    //   } catch (err) {
+    //     console.error("Error fetching data:", err);
+    //     res.status(500).send("Internal Server Error");
+    //   }
+    // });
 
 
     // TO FETCH RECORDS WITH PAGINATION
