@@ -127,6 +127,28 @@ fetch("https://imposterapi-5.onrender.com/api/data/1")
 </div>
 </div>
 
+<h3 id="single">Get limited products</h3>
+<div id="container">
+<div>
+<pre>
+fetch("https://imposterapi-5.onrender.com?limit=28") 
+.then(res => res.json())
+.then(res => console.log(res))
+</pre>
+</div>
+</div>
+
+<h3 id="single">Pagination</h3>
+<div id="container">
+<div>
+<pre>
+fetch("https://imposterapi-5.onrender.com?page=2") 
+.then(res => res.json())
+.then(res => console.log(res))
+</pre>
+</div>
+</div>
+
 <h3 id="category">Get Products by Category</h3>
 <div id="container">
 <div>

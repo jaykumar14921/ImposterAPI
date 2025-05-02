@@ -127,22 +127,37 @@
                 </div>
             </div>
 
-            <div style="width: 400px;">
+            <div style="width: 400px; margin-left: 120px;">
+
                 <h4 style="color:  rgb(7, 193, 109);">Resources</h4>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between m-0">
                   <h5 style="color:  rgb(7, 193, 109);">Products:</h5>
-                  <h6 class="mt-2">776 Products</h6>
+                  <h6 class="mt-1">776 Products</h6>
                 </div>
 
-                <div class="d-flex justify-content-between">
-                    <h5 style="color:  rgb(7, 193, 109);">Category:</h5>
-                    <h6 class="mt-2">7 Category</h6>
+                <div class="d-block">
+                    <div class="d-flex justify-content-between mt-2">
+                        <div class="m-0">
+                            <h5 style="color:  rgb(7, 193, 109);">Category:</h5>
+                        </div>
+                        <div class="d-flex mb-0">
+                            <h6 class="mt-1">7 Category</h6>
+                        <button class="btn btn-success btn-sm ms-2" data-bs-target="#category" data-bs-toggle="modal">see</button>
+                        </div>
+                    </div>
+    
+                    <div class="d-flex justify-content-between" style="margin-top: -310px; margin-bottom: -490px;">
+                        <div class="">
+                            <h5 style="color:  rgb(7, 193, 109);">Sub-Category:</h5>
+                        </div>
+                        <div class="d-flex">
+                            <h6 class="mt-1">39 Sub-Category</h6>
+                            <button class="btn btn-success btn-sm ms-2">see</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="d-flex justify-content-between">
-                    <h5 style="color:  rgb(7, 193, 109);">Sub-Category:</h5>
-                    <h6 class="mt-2">39 Sub-Category</h6>
-                </div>
+               
             </div>
 
             <div id="routes" class="ms-5">
@@ -200,6 +215,30 @@
                     <a href="null">https://imposterapi-5.onrender.com/data/1</a>
                 </div>
 
+            </div>
+
+            <div id="category" class="modal fade">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                              <h2 class="modal-title">Category</h2>
+                              <button class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body" style="height: 120px;">
+                            <div>
+                                    [
+                                    "atta_rice",
+                                    "dairy_breakfast",
+                                    "drinks",
+                                    "fruit_veges",
+                                    "instant_food",
+                                    "oil_masala",
+                                    "personal_care"
+                                    ]
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
       </section>
