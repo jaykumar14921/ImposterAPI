@@ -4,6 +4,8 @@ const path=require('path');
 const { MongoClient } = require('mongodb');
 const { link } = require("fs");
 const cors=require("cors");
+const Product = require('./models/product.js'); // Make sure the path is correct
+
 
 const uri = process.env.MONGODBatlas_URL;
 
@@ -39,19 +41,24 @@ async function main() {
     //TO FETCH ALL RECORDS
 
     app.get('/data', async (req, res) => {
-      const page = parseInt(req.query.page) || 1;
-      const limit = parseInt(req.query.limit) || 28;
-      const skip = (page - 1) * limit;
+      try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
     
-      const data = await Product.find().skip(skip).limit(limit);
-      const total = await Product.countDocuments();
+        const data = await Product.find().skip(skip).limit(limit);
+        const total = await Product.countDocuments();
     
-      res.json({
-        page,
-        limit,
-        total,
-        data
-      });
+        res.json({
+          page,
+          limit,
+          total,
+          data
+        });
+      } catch (error) {
+        console.error('Pagination error:', error);
+        res.status(500).json({ message: 'Internal server error', error: error.message });
+      }
     });
     
 
