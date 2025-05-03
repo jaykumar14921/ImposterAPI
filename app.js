@@ -4,8 +4,6 @@ const path=require('path');
 const { MongoClient } = require('mongodb');
 const { link } = require("fs");
 const cors=require("cors");
-const Product = require('./models/product.js'); // Make sure the path is correct
-
 
 const uri = process.env.MONGODBatlas_URL;
 
