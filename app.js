@@ -39,14 +39,31 @@ async function main() {
     //TO FETCH ALL RECORDS
 
     app.get('/data', async (req, res) => {
-      try {
-        const data = await collection.find({}).toArray();
-        res.json(data);
-      } catch (err) {
-        console.error("Error fetching data:", err);
-        res.status(500).send("Internal Server Error");
-      }
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 28;
+      const skip = (page - 1) * limit;
+    
+      const data = await Product.find().skip(skip).limit(limit);
+      const total = await Product.countDocuments();
+    
+      res.json({
+        page,
+        limit,
+        total,
+        data
+      });
     });
+    
+
+    // app.get('/data', async (req, res) => {
+    //   try {
+    //     const data = await collection.find({}).toArray();
+    //     res.json(data);
+    //   } catch (err) {
+    //     console.error("Error fetching data:", err);
+    //     res.status(500).send("Internal Server Error");
+    //   }
+    // });
 
 
     // TO FETCH RECORDS WITH PAGINATION
