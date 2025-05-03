@@ -39,34 +39,14 @@ async function main() {
     //TO FETCH ALL RECORDS
 
     app.get('/data', async (req, res) => {
-      const limit = parseInt(req.query.limit) || 10;
-      const page = parseInt(req.query.page) || 1;
-      const startIndex = (page - 1) * limit;
-    
       try {
-        const totalProducts = await Product.countDocuments({}); // No category filter
-        const products = await Product.find({}) // No category filter
-          .skip(startIndex)
-          .limit(limit);
-    
-        const totalPages = Math.ceil(totalProducts / limit);
-    
-        res.json({ data: products, totalPages: totalPages });
-      } catch (error) {
-        console.error('Error fetching products:', error);
-        res.status(500).json({ error: 'Failed to fetch products' });
+        const data = await collection.find({}).toArray();
+        res.json(data);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        res.status(500).send("Internal Server Error");
       }
     });
-
-    // app.get('/data', async (req, res) => {
-    //   try {
-    //     const data = await collection.find({}).toArray();
-    //     res.json(data);
-    //   } catch (err) {
-    //     console.error("Error fetching data:", err);
-    //     res.status(500).send("Internal Server Error");
-    //   }
-    // });
 
 
     // TO FETCH RECORDS WITH PAGINATION
