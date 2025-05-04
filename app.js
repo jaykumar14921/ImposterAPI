@@ -36,60 +36,60 @@ async function main() {
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
 
-    //TO FETCH ALL RECORDS
+   
 
 
-    app.get('/data', async (req, res) => {
-      try {
-        // Default pagination values
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 28;
-        const category = req.query.category || 'all';
-        const subCategory = req.query.subCategory || 'all';
-    
-        if (isNaN(page) || page < 1 || isNaN(limit) || limit < 1) {
-          return res.status(400).json({ error: 'Invalid page or limit value.' });
-        }
-    
-        const skip = (page - 1) * limit;
-        let query = {};
-    
-        // Handle category and subcategory filtering
-        if (category !== 'all') {
-          query['categories.category'] = category;
-        }
-        if (subCategory !== 'all') {
-          query['categories.sub_category'] = subCategory;
-        }
-    
-        const total = await collection.countDocuments(query);
-        const data = await collection.find(query).skip(skip).limit(limit).toArray();
-        const totalPages = Math.ceil(total / limit);
-    
-        res.json({
-          data,
-          total,
-          page,
-          totalPages
-        });
-    
-      } catch (err) {
-        console.error("Error fetching paginated data:", err);
-        res.status(500).send("Internal Server Error");
-      }
-    });
-    
-
-  
     // app.get('/data', async (req, res) => {
     //   try {
-    //     const data = await collection.find({}).toArray();
-    //     res.json(data);
+    //     // Default pagination values
+    //     const page = parseInt(req.query.page) || 1;
+    //     const limit = parseInt(req.query.limit) || 28;
+    //     const category = req.query.category || 'all';
+    //     const subCategory = req.query.subCategory || 'all';
+    
+    //     if (isNaN(page) || page < 1 || isNaN(limit) || limit < 1) {
+    //       return res.status(400).json({ error: 'Invalid page or limit value.' });
+    //     }
+    
+    //     const skip = (page - 1) * limit;
+    //     let query = {};
+    
+    //     // Handle category and subcategory filtering
+    //     if (category !== 'all') {
+    //       query['categories.category'] = category;
+    //     }
+    //     if (subCategory !== 'all') {
+    //       query['categories.sub_category'] = subCategory;
+    //     }
+    
+    //     const total = await collection.countDocuments(query);
+    //     const data = await collection.find(query).skip(skip).limit(limit).toArray();
+    //     const totalPages = Math.ceil(total / limit);
+    
+    //     res.json({
+    //       data,
+    //       total,
+    //       page,
+    //       totalPages
+    //     });
+    
     //   } catch (err) {
-    //     console.error("Error fetching data:", err);
+    //     console.error("Error fetching paginated data:", err);
     //     res.status(500).send("Internal Server Error");
     //   }
     // });
+    
+
+   //TO FETCH ALL RECORDS
+    app.get('/data', async (req, res) => {
+      try {
+        const data = await collection.find({}).toArray();
+        res.json(data);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        res.status(500).send("Internal Server Error");
+      }
+    });
 
 
     // TO FETCH RECORDS WITH PAGINATION
