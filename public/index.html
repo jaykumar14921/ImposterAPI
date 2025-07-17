@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="icon" href="/assets/fav_icon1.png" type="image/x-icon"> 
     <style>
+
+        *{
+            margin: 0px;
+        }
+
         body{
             background-image: url("/assets/1744616171741.jpg");
             background-size: 90% 580px;
@@ -76,6 +81,18 @@
         margin-right: 20%;
        }
 
+       #demo_website_Img{
+        height: 60%;
+        width: 70%;
+        border-radius: 40px;
+        padding: 2%;
+       }
+
+       #demo_website_Img:hover{
+        cursor: pointer;
+        transform: scale(1.01);
+       }
+
         @media (max-width:700px){
             body{
                 background-image: url("../assets/1744616171741.jpg");
@@ -116,7 +133,7 @@
                 <p>ImposterAPI is a free online REST API that you can utilize to obtain pseudo-real data for your e-commerce grocery website, all without the need for any server-side coding. It’s perfect for educational purposes, sample code demonstrations, testing, and more.</p>
             </div>
 
-            <div id="image2" class="d-flex ms-5">
+            <div id="image2" class="d-flex ms-5" style="margin-top: -150px;">
                 <div >
                       <img src="/assets/25182798_7052735.jpg" class="mt-5" width="300px"  alt="">
                 </div>
@@ -127,7 +144,23 @@
                 </div>
             </div>
 
-            <div style="width: 400px; margin-left: 120px; margin-top: -70px;">
+
+            <div>
+                <div class="m-0" style="padding-left: 2%;">
+                    <h3 style="color: rgb(7, 193, 109);">Demo Website</h3>
+                    <p>A demo E-commerce website Created using this API.</p>
+                </div>
+                <div style="background-color: rgba(128, 128, 128, 0.119);">
+                <div align="center">
+                    <a href="https://e-commerce-irpp.onrender.com/" target="_blank">
+                        <img id="demo_website_Img" src="../public/assets/demo_website.png" alt="Demo_Website">
+                    </a>
+                </div>
+            </div>
+            </div>
+
+
+            <div style="width: 400px; margin-left: 120px; margin-top: -170px;">
 
                 <h4 style="color:  rgb(7, 193, 109);">Resources</h4>
                 <div class="d-flex justify-content-between m-0">
@@ -152,13 +185,14 @@
                         </div>
                         <div class="d-flex">
                             <h6 class="mt-1">39 Sub-Category</h6>
-                            <button class="btn btn-success btn-sm ms-2">see</button>
+                            <button class="btn btn-success btn-sm ms-2" data-bs-target="#sub-category" data-bs-toggle="modal">see</button>
                         </div>
                     </div>
                 </div>
 
                
             </div>
+
 
             <div id="routes" class="ms-5">
                 <h1 style="color: rgb(7, 193, 109);">Routes</h1>
@@ -220,26 +254,126 @@
             <div id="category" class="modal fade">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header m-0">
                               <h2 class="modal-title">Category</h2>
                               <button class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
-                        <div class="modal-body" style="height: 120px;">
-                            <div>
-                                    [
-                                    "atta_rice",
-                                    "dairy_breakfast",
-                                    "drinks",
-                                    "fruit_veges",
-                                    "instant_food",
-                                    "oil_masala",
-                                    "personal_care"
-                                    ]
-                            </div>
+
+        <div class="modal-body m-0">
+                    <pre  >
+                    [
+                        "atta_rice",
+                        "dairy_breakfast",
+                        "drinks",
+                        "fruit_veges",
+                        "instant_food",
+                        "oil_masala",
+                        "personal_care"
+                     ]
+                    </pre>
+        </div>                    
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id="sub-category" class="modal fade m-lg-5">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header m-0">
+                              <h2 class="modal-title">Sub-Categories</h2>
+                              <button class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+            <div class="modal-body m-0">
+                <pre>
+                    [
+
+                        {
+                            "dairy_breakfast":[
+                               "bread",
+                               "butter",
+                               "cheese",
+                               "curd",
+                               "eggs",
+                               "paneer",
+                               "milk"
+                            ]
+                        },
+
+                        {
+                            "atta_rice":[
+                               "atta",
+                               "besan",
+                               "dal",
+                               "poha",
+                               "rajma",
+                               "rice"
+                            ]
+                        },
+
+                        {
+                            "instant_food":[
+                               "non_veg_snack",
+                               "veg_snack",
+                               "instant_mix",
+                               "noodle",
+                               "pasta",
+                               "soup"
+                            ]
+                        },
+
+                        {
+                            "drinks":[
+                                "cold_coffee",
+                                "syrups",
+                                "energy_drink",
+                                "fruit_juice",
+                                "lassi",
+                                "soft_drink"
+                            ]
+                        },
+
+                        {
+                            "oil_masala":[
+                                "dryfruit",
+                                "oil",
+                                "powder_masala",
+                                "salt_sugar",
+                                "whole_spices"
+                            ]
+                        },
+
+                        {
+                            "personal_care":[
+                                "baby_care",
+                                "bathing_soap",
+                                "moisturizer",
+                                "facewash",
+                                "hair_care",
+                                "oral_care"
+                            ]
+                        }, 
+
+                        {
+                            "fruit_veges":[
+                                "fruit",
+                                "vegetable",
+                                "frozen_veg"
+                            ]
+                        }
+
+                    ]
+                                
+                            </pre>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
 
       </section>
 
