@@ -109,6 +109,29 @@
              }
 
         }
+
+         @media (max-width:400px){
+               header{
+                width: 550px;
+               }
+
+               #let{
+                margin-left: 0%;
+                margin-right: -170px;
+               }
+
+               #routes{
+                width: 80%;
+               }
+
+               #demo_website_Img{
+                width: 140%;
+               }
+
+               #demo{
+                width: 110%;
+               }
+         }
     </style>
 </head>
 <body>
@@ -127,15 +150,16 @@
       </header>
 
       <section>
-            <div class="d-block" align="center">
+            <div align="center" id="let">
+                <div class="d-block" align="center">
                 <h1 id="home" style="color: rgb(7, 193, 109);">Let's</h3>
                 <h1>Create The Best</h1>
                 <p>ImposterAPI is a free online REST API that you can utilize to obtain pseudo-real data for your e-commerce grocery website, all without the need for any server-side coding. It’s perfect for educational purposes, sample code demonstrations, testing, and more.</p>
-            </div>
+                </div>
 
-            <div id="image2" class="d-flex ms-5">
+            <div id="image2" class="d-flex">
                 <div >
-                      <img src="/assets/25182798_7052735.jpg" class="mt-5" width="300px"  alt="">
+                      <img src="assets/25182798_7052735.jpg" class="mt-5" width="300px"  alt="">
                 </div>
                 <div style="margin: 7%; margin-left: 10%;">
                       <h1 style="color: rgb(7, 193, 109);">E-commerce Grocery API</h1>
@@ -143,18 +167,19 @@
                       <p>Bring your e-commerce vision to life effortlessly with our free ImposterAPI! Enjoy seamless building and testing for a standout website or app.</p>
                 </div>
             </div>
+            </div>
 
 
             <div style="margin-top: -130px;">
                 
-                <div class="m-0" style="padding-left: 4%; ">
+                <div id="demo" class="m-0" style="padding-left: 4%; ">
                     <h1 style="color: rgb(7, 193, 109);">Demo Website</h1>
                     <p style="font-weight: 600;">A demo E-commerce website Created using this API.</p>
                 </div>
                 <div style="background-color: rgba(128, 128, 128, 0.119);">
                 <div align="center">
                     <a href="https://e-commerce-irpp.onrender.com/" target="_blank">
-                        <img id="demo_website_Img" src="/assets/demo_website.png" alt="Demo_Website">
+                        <img id="demo_website_Img" src="assets/demo_website.png" alt="Demo_Website">
                     </a>
                 </div>
             </div>
